@@ -6,6 +6,8 @@ export const COMMAND = {
   cat: 'cat',
   add: 'add',
   os: 'os',
+  rn: 'rn',
+  rm: 'rm',
 };
 
 export const OS_COMMAND = {

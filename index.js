@@ -6,31 +6,57 @@ import changeDirectory from './modules/fileSystem/changeDirectory.js';
 import readFile from './modules/fileSystem/readFile.js';
 import createFile from './modules/fileSystem/createFile.js';
 import osController from './modules/operationSystem/osController.js';
+import renameFile from './modules/fileSystem/renameFile.js';
+import deleteFile from './modules/fileSystem/deleteFile.js';
 
 const initApp = async () => {
   welcome();
 
   rl.on('line', async (input) => {
-    const commandToArr = input.trim().split(' ');
+    const command = input.trim().split(' ', 1)[0];
 
-    const command = commandToArr[0];
-    const commandArgs = commandToArr.slice(1);
+    const commandArgs =
+      input &&
+      input
+        .match(/(?:[^\s"]+|"[^"]*")+/g)
+        .map((arg) => arg.replace(/"/g, ''))
+        .slice(1);
 
-    if (!COMMAND[command] && command !== '') console.log(ERROR.invalidCommand);
+    if (!Object.values(COMMAND).includes(command) && command !== '') {
+      console.log(ERROR.invalidCommand);
+    }
 
-    if (command === COMMAND.exit) rl.close();
-
-    if (command === COMMAND.ls) await listOfFiles();
-
-    if (command === COMMAND.up) process.chdir('..');
-
-    if (command === COMMAND.cd) await changeDirectory(commandArgs);
-
-    if (command === COMMAND.cat) await readFile(commandArgs);
-
-    if (command === COMMAND.add) await createFile(commandArgs);
-
-    if (command === COMMAND.os) await osController(commandArgs);
+    switch (command) {
+      case COMMAND.exit:
+        rl.close();
+        break;
+      case COMMAND.ls:
+        await listOfFiles();
+        break;
+      case COMMAND.up:
+        process.chdir('..');
+        break;
+      case COMMAND.cd:
+        await changeDirectory(commandArgs);
+        break;
+      case COMMAND.cat:
+        await readFile(commandArgs);
+        break;
+      case COMMAND.add:
+        await createFile(commandArgs);
+        break;
+      case COMMAND.os:
+        await osController(commandArgs);
+        break;
+      case COMMAND.rn:
+        await renameFile(commandArgs);
+        break;
+      case COMMAND.rm:
+        await deleteFile(commandArgs);
+        break;
+      default:
+        break;
+    }
 
     console.log(`You are currently in ${process.cwd()}`);
   });

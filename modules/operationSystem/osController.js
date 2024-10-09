@@ -10,7 +10,7 @@ const osController = async (args) => {
     const command = args.join(' ').toLowerCase();
 
     if (!Object.values(OS_COMMAND).includes(command)) {
-      console.log(ERROR.operationFailed);
+      console.log(ERROR.invalidCommand);
       return;
     }
 

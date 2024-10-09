@@ -4,7 +4,7 @@ import { ERROR } from '../../utils/constants.js';
 
 const readFile = async (filePath) => {
   try {
-    const pathToFile = path.join(process.cwd(), filePath.join(' '));
+    const pathToFile = path.resolve(process.cwd(), filePath.join(' '));
 
     const readStream = fs.createReadStream(pathToFile);
 

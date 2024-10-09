@@ -1,7 +1,8 @@
 import fs from 'node:fs/promises';
 import { ERROR } from '../../utils/constants.js';
+import os from 'node:os';
 
-const ls = async () => {
+const listOfFiles = async () => {
   try {
     const dir = await fs.opendir(process.cwd());
 
@@ -30,4 +31,4 @@ const ls = async () => {
   }
 };
 
-export default ls;
+export default listOfFiles;

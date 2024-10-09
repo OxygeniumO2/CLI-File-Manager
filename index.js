@@ -5,6 +5,7 @@ import listOfFiles from './modules/fileSystem/listOfFiles.js';
 import changeDirectory from './modules/fileSystem/changeDirectory.js';
 import readFile from './modules/fileSystem/readFile.js';
 import createFile from './modules/fileSystem/createFile.js';
+import osController from './modules/operationSystem/osController.js';
 
 const initApp = async () => {
   welcome();
@@ -28,6 +29,8 @@ const initApp = async () => {
     if (command === COMMAND.cat) await readFile(commandArgs);
 
     if (command === COMMAND.add) await createFile(commandArgs);
+
+    if (command === COMMAND.os) await osController(commandArgs);
 
     console.log(`You are currently in ${process.cwd()}`);
   });

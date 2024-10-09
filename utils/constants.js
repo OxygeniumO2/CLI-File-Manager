@@ -5,6 +5,15 @@ export const COMMAND = {
   cd: 'cd',
   cat: 'cat',
   add: 'add',
+  os: 'os',
+};
+
+export const OS_COMMAND = {
+  eol: '--eol',
+  cpus: '--cpus',
+  homedir: '--homedir',
+  username: '--username',
+  architecture: '--architecture',
 };
 
 export const ERROR = {

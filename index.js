@@ -1,15 +1,8 @@
 import welcome from './modules/welcome/welcome.js';
 import rl from './modules/readLine/readLine.js';
-import { COMMAND, ERROR } from './utils/constants.js';
-import listOfFiles from './modules/fileSystem/listOfFiles.js';
-import changeDirectory from './modules/fileSystem/changeDirectory.js';
-import readFile from './modules/fileSystem/readFile.js';
-import createFile from './modules/fileSystem/createFile.js';
+import { COMMAND, ERROR, COMMAND_FS } from './utils/constants.js';
 import osController from './modules/operationSystem/osController.js';
-import renameFile from './modules/fileSystem/renameFile.js';
-import deleteFile from './modules/fileSystem/deleteFile.js';
-import copyFile from './modules/fileSystem/copyFile.js';
-import moveFile from './modules/fileSystem/moveFile.js';
+import fsController from './modules/fileSystem/fsController.js';
 
 const initApp = async () => {
   welcome();
@@ -29,42 +22,15 @@ const initApp = async () => {
       return;
     }
 
-    switch (command) {
-      case COMMAND.exit:
-        rl.close();
-        break;
-      case COMMAND.ls:
-        await listOfFiles();
-        break;
-      case COMMAND.up:
-        process.chdir('..');
-        break;
-      case COMMAND.cd:
-        await changeDirectory(commandArgs);
-        break;
-      case COMMAND.cat:
-        await readFile(commandArgs);
-        break;
-      case COMMAND.add:
-        await createFile(commandArgs);
-        break;
-      case COMMAND.os:
-        await osController(commandArgs);
-        break;
-      case COMMAND.rn:
-        await renameFile(commandArgs);
-        break;
-      case COMMAND.rm:
-        await deleteFile(commandArgs);
-        break;
-      case COMMAND.cp:
-        await copyFile(commandArgs);
-        break;
-      case COMMAND.mv:
-        await moveFile(commandArgs);
-        break;
-      default:
-        break;
+    if (command === COMMAND.exit) {
+      rl.close();
+      process.exit();
+    }
+
+    if (Object.values(COMMAND_FS).includes(command)) {
+      await fsController(command, commandArgs);
+    } else if (command === COMMAND.os) {
+      await osController(commandArgs);
     }
 
     console.log(`You are currently in ${process.cwd()}`);

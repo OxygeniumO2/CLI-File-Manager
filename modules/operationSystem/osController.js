@@ -1,4 +1,4 @@
-import { ERROR, OS_COMMAND } from '../../utils/constants.js';
+import { ERROR, COMMAND_OS_ARGS } from '../../utils/constants.js';
 import getCpus from './getCpus.js';
 import getHomeDir from './getHomeDir.js';
 import getUsername from './getUsername.js';
@@ -9,25 +9,25 @@ const osController = async (args) => {
   try {
     const command = args.join(' ').toLowerCase();
 
-    if (!Object.values(OS_COMMAND).includes(command)) {
+    if (!Object.values(COMMAND_OS_ARGS).includes(command)) {
       console.log(ERROR.invalidCommand);
       return;
     }
 
     switch (command) {
-      case OS_COMMAND.eol:
+      case COMMAND_OS_ARGS.eol:
         getEndOfLine();
         break;
-      case OS_COMMAND.cpus:
+      case COMMAND_OS_ARGS.cpus:
         getCpus();
         break;
-      case OS_COMMAND.homedir:
+      case COMMAND_OS_ARGS.homedir:
         getHomeDir();
         break;
-      case OS_COMMAND.username:
+      case COMMAND_OS_ARGS.username:
         getUsername();
         break;
-      case OS_COMMAND.architecture:
+      case COMMAND_OS_ARGS.architecture:
         getArchitecture();
         break;
     }

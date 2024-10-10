@@ -1,23 +1,38 @@
-export const COMMAND = {
+const COMMAND_OTHER = {
   exit: '.exit',
+};
+
+const COMMAND_OS = {
+  os: 'os',
+};
+
+export const COMMAND_FS = {
   ls: 'ls',
   up: 'up',
   cd: 'cd',
   cat: 'cat',
   add: 'add',
-  os: 'os',
   rn: 'rn',
   rm: 'rm',
   cp: 'cp',
   mv: 'mv',
+  hash: 'hash',
+  compress: 'compress',
+  decompress: 'decompress',
 };
 
-export const OS_COMMAND = {
+export const COMMAND_OS_ARGS = {
   eol: '--eol',
   cpus: '--cpus',
   homedir: '--homedir',
   username: '--username',
   architecture: '--architecture',
+};
+
+export const COMMAND = {
+  ...COMMAND_FS,
+  ...COMMAND_OS,
+  ...COMMAND_OTHER,
 };
 
 export const ERROR = {

@@ -8,6 +8,8 @@ import createFile from './modules/fileSystem/createFile.js';
 import osController from './modules/operationSystem/osController.js';
 import renameFile from './modules/fileSystem/renameFile.js';
 import deleteFile from './modules/fileSystem/deleteFile.js';
+import copyFile from './modules/fileSystem/copyFile.js';
+import moveFile from './modules/fileSystem/moveFile.js';
 
 const initApp = async () => {
   welcome();
@@ -24,6 +26,7 @@ const initApp = async () => {
 
     if (!Object.values(COMMAND).includes(command) && command !== '') {
       console.log(ERROR.invalidCommand);
+      return;
     }
 
     switch (command) {
@@ -53,6 +56,12 @@ const initApp = async () => {
         break;
       case COMMAND.rm:
         await deleteFile(commandArgs);
+        break;
+      case COMMAND.cp:
+        await copyFile(commandArgs);
+        break;
+      case COMMAND.mv:
+        await moveFile(commandArgs);
         break;
       default:
         break;

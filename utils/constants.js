@@ -8,6 +8,8 @@ export const COMMAND = {
   os: 'os',
   rn: 'rn',
   rm: 'rm',
+  cp: 'cp',
+  mv: 'mv',
 };
 
 export const OS_COMMAND = {

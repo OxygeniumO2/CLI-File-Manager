@@ -9,7 +9,12 @@ const renameFile = async (filePath) => {
     const currentArgs = filePath;
     const [pathToFile, pathToNewFile] = pathResolver(currentArgs);
 
-    await fs.rename(pathToFile, pathToNewFile);
+    const currDirPath = path.dirname(pathToFile);
+    const renamedFile = path.basename(pathToNewFile);
+
+    const pathToNewDir = path.join(currDirPath, renamedFile);
+
+    await fs.rename(pathToFile, pathToNewDir);
 
     const successfullyMsg = `File "${path.basename(
       pathToFile

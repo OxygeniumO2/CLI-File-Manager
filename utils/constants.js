@@ -51,4 +51,25 @@ export const ERROR_MESSAGES = {
   ENOMEM: 'Not enough memory',
   ETIMEDOUT: 'Operation timed out',
   EBUSY: 'Resource busy or locked',
+  EXDEV: 'Cross-device link not permitted',
 };
+
+export const COMMAND_FS_NO_ARG = [COMMAND_FS.ls, COMMAND_FS.up];
+
+export const COMMAND_FS_SINGLE_ARG = [
+  COMMAND_FS.cat,
+  COMMAND_FS.add,
+  COMMAND_FS.rm,
+  COMMAND_FS.cd,
+  COMMAND_FS.hash,
+];
+
+export const COMMAND_FS_MULTI_ARGS = [
+  COMMAND_FS.rn,
+  COMMAND_FS.cp,
+  COMMAND_FS.mv,
+  COMMAND_FS.compress,
+  COMMAND_FS.decompress,
+];
+
+export const CUSTOM_ERROR_TEXT = 'Custom error:';

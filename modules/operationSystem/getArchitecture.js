@@ -3,7 +3,7 @@ import errorHandler from '../../utils/errorHandler.js';
 
 const getArchitecture = () => {
   try {
-    console.log(`Architecture: ${os.arch()}`);
+    console.log(`Architecture: ${os.arch()}${os.EOL}`);
   } catch (err) {
     errorHandler(err);
   }

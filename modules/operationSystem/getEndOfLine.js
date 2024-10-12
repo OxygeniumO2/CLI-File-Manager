@@ -5,13 +5,13 @@ const getEndOfLine = () => {
 
   switch (os.EOL) {
     case '\n':
-      console.log(`${message}\\n`);
+      console.log(`${message}\\n${os.EOL}`);
       break;
     case '\r\n':
-      console.log(`${message}\\r\\n`);
+      console.log(`${message}\\r\\n${os.EOL}`);
       break;
     case '\r':
-      console.log(`${message}\\r`);
+      console.log(`${message}\\r${os.EOL}`);
       break;
   }
 };

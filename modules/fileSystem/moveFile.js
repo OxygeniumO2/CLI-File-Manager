@@ -9,7 +9,7 @@ const moveFile = async (filePath) => {
     const [fileName, dirName] = await copyMoveHelper(currentArgs);
     await fs.unlink(currentArgs[0]);
 
-    const successfullyMsg = `File "${fileName}" successfully moved to "${dirName}"${os.EOL}`;
+    const successfullyMsg = `File "${fileName}" successfully moved to directory "${dirName}"${os.EOL}`;
 
     console.log(successfullyMsg);
   } catch (err) {

@@ -66,10 +66,10 @@ const fsController = async (command, args) => {
       await calculateHash(commandArgs);
       break;
     case COMMAND_FS.compress:
-      compressDecompress(currentCommand, commandArgs);
+      await compressDecompress(currentCommand, commandArgs);
       break;
     case COMMAND_FS.decompress:
-      compressDecompress(currentCommand, commandArgs);
+      await compressDecompress(currentCommand, commandArgs);
     default:
       break;
   }

@@ -7,7 +7,7 @@ const copyFile = async (filePath) => {
     const currentArgs = filePath;
     const [fileName, dirName] = await copyMoveHelper(currentArgs);
 
-    const successfullyMsg = `File "${fileName}" successfully copied to "${dirName}"${os.EOL}`;
+    const successfullyMsg = `File "${fileName}" successfully copied to directory "${dirName}"${os.EOL}`;
 
     console.log(successfullyMsg);
   } catch (err) {

@@ -1,14 +1,19 @@
 import fs from 'node:fs/promises';
-import { ERROR } from '../../utils/constants.js';
+import os from 'node:os';
 import copyMoveHelper from './copyMoveHelper.js';
+import errorHandler from '../../utils/errorHandler.js';
 
 const moveFile = async (filePath) => {
   try {
     const currentArgs = filePath;
-    await copyMoveHelper(currentArgs);
+    const [fileName, dirName] = await copyMoveHelper(currentArgs);
     await fs.unlink(currentArgs[0]);
-  } catch {
-    console.log(ERROR.operationFailed);
+
+    const successfullyMsg = `File "${fileName}" successfully moved to "${dirName}"${os.EOL}`;
+
+    console.log(successfullyMsg);
+  } catch (err) {
+    errorHandler(err);
   }
 };
 

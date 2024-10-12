@@ -1,6 +1,8 @@
 import fs from 'node:fs/promises';
-import { ERROR } from '../../utils/constants.js';
+import os from 'node:os';
+import path from 'node:path';
 import pathResolver from '../../utils/pathHelper.js';
+import errorHandler from '../../utils/errorHandler.js';
 
 const renameFile = async (filePath) => {
   try {
@@ -8,8 +10,14 @@ const renameFile = async (filePath) => {
     const [pathToFile, pathToNewFile] = pathResolver(currentArgs);
 
     await fs.rename(pathToFile, pathToNewFile);
-  } catch {
-    console.log(ERROR.operationFailed);
+
+    const successfullyMsg = `File "${path.basename(
+      pathToFile
+    )}" successfully renamed to "${path.basename(pathToNewFile)}"${os.EOL}`;
+
+    console.log(successfullyMsg);
+  } catch (err) {
+    errorHandler(err);
   }
 };
 

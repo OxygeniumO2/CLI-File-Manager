@@ -1,12 +1,17 @@
-import { ERROR } from '../../utils/constants.js';
+import os from 'node:os';
 import copyMoveHelper from './copyMoveHelper.js';
+import errorHandler from '../../utils/errorHandler.js';
 
 const copyFile = async (filePath) => {
   try {
     const currentArgs = filePath;
-    await copyMoveHelper(currentArgs);
-  } catch {
-    console.log(ERROR.operationFailed);
+    const [fileName, dirName] = await copyMoveHelper(currentArgs);
+
+    const successfullyMsg = `File "${fileName}" successfully copied to "${dirName}"${os.EOL}`;
+
+    console.log(successfullyMsg);
+  } catch (err) {
+    errorHandler(err);
   }
 };
 

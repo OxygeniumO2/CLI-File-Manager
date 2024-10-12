@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { ERROR, ERROR_CODE } from '../../utils/constants.js';
+import errorHandler from '../../utils/errorHandler.js';
+import os from 'node:os';
 
 const createFile = async (filePath) => {
   try {
@@ -9,12 +10,12 @@ const createFile = async (filePath) => {
     await fs.writeFile(pathToFile, '', {
       flag: 'wx',
     });
+
+    const successfullyMsg = `File "${path.basename(pathToFile)}" successfully created${os.EOL}`;
+
+    console.log(successfullyMsg);
   } catch (err) {
-    if (err.code === ERROR_CODE.exist) {
-      console.log(`${ERROR.operationFailed}: File already exists`);
-    } else {
-      console.log(ERROR.operationFailed);
-    }
+    errorHandler(err);
   }
 };
 

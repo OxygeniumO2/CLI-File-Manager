@@ -1,7 +1,7 @@
 import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
-import { ERROR } from '../../utils/constants.js';
+import errorHandler from '../../utils/errorHandler.js';
 
 const calculateHash = async (filePath) => {
   try {
@@ -20,13 +20,13 @@ const calculateHash = async (filePath) => {
         resolve();
       });
 
-      readStream.on('error', () => {
-        console.log(ERROR.operationFailed);
+      readStream.on('error', (err) => {
+        errorHandler(err);
         resolve();
       });
     });
-  } catch {
-    console.log(ERROR.operationFailed);
+  } catch (err) {
+    errorHandler(err);
   }
 };
 

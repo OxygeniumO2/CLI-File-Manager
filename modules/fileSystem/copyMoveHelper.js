@@ -1,6 +1,5 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { ERROR } from '../../utils/constants.js';
 import pathResolver from '../../utils/pathHelper.js';
 import { pipeline } from 'node:stream/promises';
 
@@ -17,8 +16,10 @@ const copyMoveHelper = async (filePath) => {
     const writeStream = fs.createWriteStream(pathToNewFile);
 
     await pipeline(readStream, writeStream);
-  } catch {
-    console.log(ERROR.operationFailed);
+
+    return [path.basename(pathToFile), path.dirname(pathToNewFile)];
+  } catch (err) {
+    throw err;
   }
 };
 

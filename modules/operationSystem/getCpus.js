@@ -1,5 +1,5 @@
 import os from 'os';
-import { ERROR } from '../../utils/constants.js';
+import errorHandler from '../../utils/errorHandler.js';
 
 const getCpus = async () => {
   try {
@@ -12,8 +12,8 @@ const getCpus = async () => {
     }, []);
 
     console.table(tableData);
-  } catch {
-    console.log(ERROR.operationFailed);
+  } catch (err) {
+    errorHandler(err);
   }
 };
 

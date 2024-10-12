@@ -1,9 +1,10 @@
 import fs from 'node:fs/promises';
-import { ERROR } from '../../utils/constants.js';
-import os from 'node:os';
+import errorHandler from '../../utils/errorHandler.js';
 
-const listOfFiles = async () => {
+const listOfFiles = async (args) => {
   try {
+    if (args.length > 0) throw new Error();
+
     const dir = await fs.opendir(process.cwd());
 
     const tableData = [];
@@ -26,8 +27,8 @@ const listOfFiles = async () => {
     });
 
     console.table(tableData);
-  } catch {
-    console.log(ERROR.operationFailed);
+  } catch (err) {
+    errorHandler(err);
   }
 };
 

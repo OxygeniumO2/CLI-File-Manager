@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { ERROR } from '../../utils/constants.js';
+import errorHandler from '../../utils/errorHandler.js';
 
 const readFile = async (filePath) => {
   try {
@@ -15,13 +16,13 @@ const readFile = async (filePath) => {
 
       readStream.on('end', resolve);
 
-      readStream.on('error', () => {
-        console.log(ERROR.operationFailed);
+      readStream.on('error', (err) => {
+        errorHandler(err);
         resolve();
       });
     });
-  } catch {
-    console.log(ERROR.operationFailed);
+  } catch (err) {
+    errorHandler(err);
   }
 };
 

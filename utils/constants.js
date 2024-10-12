@@ -40,6 +40,15 @@ export const ERROR = {
   operationFailed: 'Operation failed',
 };
 
-export const ERROR_CODE = {
-  exist: 'EEXIST',
+export const ERROR_MESSAGES = {
+  EEXIST: 'File or directory already exists',
+  ENOENT: 'File or directory does not exist',
+  EACCES: 'Permission denied',
+  EPERM: 'Operation not permitted',
+  EISDIR: 'Is a directory, not a file',
+  ENOTDIR: 'Not a directory',
+  EROFS: 'Read-only file system',
+  ENOMEM: 'Not enough memory',
+  ETIMEDOUT: 'Operation timed out',
+  EBUSY: 'Resource busy or locked',
 };

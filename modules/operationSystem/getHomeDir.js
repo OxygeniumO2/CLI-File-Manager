@@ -1,11 +1,11 @@
 import os from 'node:os';
-import { ERROR } from '../../utils/constants.js';
+import errorHandler from '../../utils/errorHandler.js';
 
 const getHomeDir = () => {
   try {
     console.log(`Home directory is: ${os.homedir()}`);
-  } catch {
-    console.log(ERROR.operationFailed);
+  } catch (err) {
+    errorHandler(err);
   }
 };
 

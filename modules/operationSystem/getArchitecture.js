@@ -1,11 +1,11 @@
 import os from 'node:os';
-import { ERROR } from '../../utils/constants.js';
+import errorHandler from '../../utils/errorHandler.js';
 
 const getArchitecture = () => {
   try {
     console.log(`Architecture: ${os.arch()}`);
-  } catch {
-    console.log(ERROR.operationFailed);
+  } catch (err) {
+    errorHandler(err);
   }
 };
 

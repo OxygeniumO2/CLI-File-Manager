@@ -16,7 +16,7 @@ const fsController = async (command, args) => {
 
   switch (currentCommand) {
     case COMMAND_FS.ls:
-      await listOfFiles();
+      await listOfFiles(commandArgs);
       break;
     case COMMAND_FS.up:
       process.chdir('..');

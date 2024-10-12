@@ -3,6 +3,7 @@ import rl from './modules/readLine/readLine.js';
 import { COMMAND, ERROR, COMMAND_FS } from './utils/constants.js';
 import osController from './modules/operationSystem/osController.js';
 import fsController from './modules/fileSystem/fsController.js';
+import os from 'node:os';
 
 const initApp = async () => {
   welcome();
@@ -18,7 +19,8 @@ const initApp = async () => {
         .slice(1);
 
     if (!Object.values(COMMAND).includes(command) && command !== '') {
-      console.log(ERROR.invalidCommand);
+      console.log(`${ERROR.invalidCommand}${os.EOL}`);
+      console.log(`You are currently in ${process.cwd()}`);
       return;
     }
 

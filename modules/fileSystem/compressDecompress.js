@@ -2,9 +2,9 @@ import pathResolver from '../../utils/pathHelper.js';
 import { BrotliCompress, BrotliDecompress } from 'node:zlib';
 import { pipeline } from 'node:stream/promises';
 import { COMMAND_FS } from '../../utils/constants.js';
-import { ERROR } from '../../utils/constants.js';
 import fs from 'node:fs';
 import path from 'node:path';
+import errorHandler from '../../utils/errorHandler.js';
 
 const compressDecompress = async (command, args) => {
   try {
@@ -31,8 +31,8 @@ const compressDecompress = async (command, args) => {
     const toStream = fs.createWriteStream(to);
 
     await pipeline(fromStream, brotli, toStream);
-  } catch {
-    console.log(ERROR.operationFailed);
+  } catch (err) {
+    errorHandler(err);
   }
 };
 

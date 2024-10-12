@@ -1,13 +1,13 @@
-import { ERROR } from '../../utils/constants.js';
+import errorHandler from '../../utils/errorHandler.js';
 
 const changeDirectory = async (path) => {
   try {
     const joinedPath = path.join(' ');
     const pathToMove = joinedPath[1] === ':' ? joinedPath + '\\' : joinedPath;
 
-    await process.chdir(pathToMove);
-  } catch {
-    console.log(ERROR.operationFailed);
+    process.chdir(pathToMove);
+  } catch (err) {
+    errorHandler(err);
   }
 };
 

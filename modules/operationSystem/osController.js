@@ -6,14 +6,18 @@ import getArchitecture from './getArchitecture.js';
 import getEndOfLine from './getEndOfLine.js';
 import os from 'node:os';
 import errorHandler from '../../utils/errorHandler.js';
-import { redText } from '../../utils/consoleTextHelper.js';
+import { redText, yellowText } from '../../utils/consoleTextHelper.js';
 
 const osController = async (args) => {
   try {
     const command = args.join(' ').toLowerCase();
 
+    const errMsg = `${redText(`${ERROR.invalidCommand}:`)} ${yellowText('Wrong argument')}${
+      os.EOL
+    }`;
+
     if (!Object.values(COMMAND_OS_ARGS).includes(command)) {
-      console.log(`${redText(ERROR.invalidCommand)}${os.EOL}`);
+      console.log(errMsg);
       return;
     }
 

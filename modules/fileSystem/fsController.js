@@ -16,22 +16,24 @@ import moveFile from './moveFile.js';
 import calculateHash from './calculateHash.js';
 import compressDecompress from './compressDecompress.js';
 import os from 'node:os';
-import { redText } from '../../utils/consoleTextHelper.js';
+import { redText, yellowText } from '../../utils/consoleTextHelper.js';
 
 const fsController = async (command, args) => {
   const currentCommand = command;
   const commandArgs = args;
 
-  const errorMsg = `${redText(ERROR.operationFailed)}${os.EOL}`;
+  const numberOfArguments = commandArgs.length;
 
-  if (COMMAND_FS_NO_ARG.includes(currentCommand) && args.length > 0) {
-    console.log(errorMsg);
+  const errorMsg = redText(`${ERROR.invalidCommand}:`);
+
+  if (COMMAND_FS_NO_ARG.includes(currentCommand) && numberOfArguments > 0) {
+    console.log(`${errorMsg} ${yellowText('You should not pass any arguments')}${os.EOL}`);
     return;
-  } else if (COMMAND_FS_SINGLE_ARG.includes(currentCommand) && args.length !== 1) {
-    console.log(errorMsg);
+  } else if (COMMAND_FS_SINGLE_ARG.includes(currentCommand) && numberOfArguments !== 1) {
+    console.log(`${errorMsg} ${yellowText('You should pass only one argument')}${os.EOL}`);
     return;
-  } else if (COMMAND_FS_MULTI_ARGS.includes(currentCommand) && args.length !== 2) {
-    console.log(errorMsg);
+  } else if (COMMAND_FS_MULTI_ARGS.includes(currentCommand) && numberOfArguments !== 2) {
+    console.log(`${errorMsg} ${yellowText('You should pass only two arguments')}${os.EOL}`);
     return;
   }
 

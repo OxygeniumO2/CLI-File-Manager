@@ -3,6 +3,7 @@ import os from 'node:os';
 import path from 'node:path';
 import pathResolver from '../../utils/pathHelper.js';
 import errorHandler from '../../utils/errorHandler.js';
+import { greenText, cyanText } from '../../utils/consoleTextHelper.js';
 
 const renameFile = async (filePath) => {
   try {
@@ -16,9 +17,12 @@ const renameFile = async (filePath) => {
 
     await fs.rename(pathToFile, pathToNewDir);
 
-    const successfullyMsg = `File "${path.basename(
-      pathToFile
-    )}" successfully renamed to "${path.basename(pathToNewFile)}"${os.EOL}`;
+    const fileText = greenText('File ');
+    const renamedText = greenText(' successfully renamed to ');
+    const oldFileNameCyan = cyanText(`"${path.basename(pathToFile)}"`);
+    const newFileNameCyan = cyanText(`"${path.basename(pathToNewFile)}"`);
+
+    const successfullyMsg = `${fileText}${oldFileNameCyan}${renamedText}${newFileNameCyan}${os.EOL}`;
 
     console.log(successfullyMsg);
   } catch (err) {

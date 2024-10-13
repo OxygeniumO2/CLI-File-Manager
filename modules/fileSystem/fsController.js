@@ -16,12 +16,13 @@ import moveFile from './moveFile.js';
 import calculateHash from './calculateHash.js';
 import compressDecompress from './compressDecompress.js';
 import os from 'node:os';
+import { redText } from '../../utils/consoleTextHelper.js';
 
 const fsController = async (command, args) => {
   const currentCommand = command;
   const commandArgs = args;
 
-  const errorMsg = `${ERROR.operationFailed}${os.EOL}`;
+  const errorMsg = `${redText(ERROR.operationFailed)}${os.EOL}`;
 
   if (COMMAND_FS_NO_ARG.includes(currentCommand) && args.length > 0) {
     console.log(errorMsg);

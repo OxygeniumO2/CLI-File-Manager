@@ -4,9 +4,13 @@ import { COMMAND, ERROR, COMMAND_FS } from './utils/constants.js';
 import osController from './modules/operationSystem/osController.js';
 import fsController from './modules/fileSystem/fsController.js';
 import os from 'node:os';
+import { cyanText, redText } from './utils/consoleTextHelper.js';
 
 const initApp = async () => {
   welcome();
+
+  const dirMsg = `You are currently in ${cyanText(process.cwd())}`;
+  const errMsg = `${redText(ERROR.invalidCommand)}${os.EOL}`;
 
   rl.on('line', async (input) => {
     const command = input.trim().split(' ', 1)[0];
@@ -19,8 +23,8 @@ const initApp = async () => {
         .slice(1);
 
     if (!Object.values(COMMAND).includes(command) && command !== '') {
-      console.log(`${ERROR.invalidCommand}${os.EOL}`);
-      console.log(`You are currently in ${process.cwd()}`);
+      console.log(errMsg);
+      console.log(dirMsg);
       return;
     }
 
@@ -35,7 +39,7 @@ const initApp = async () => {
       await osController(commandArgs);
     }
 
-    console.log(`You are currently in ${process.cwd()}`);
+    console.log(dirMsg);
   });
 };
 

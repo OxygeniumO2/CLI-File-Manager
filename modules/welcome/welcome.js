@@ -1,5 +1,6 @@
 import os from 'node:os';
 import rl from '../readLine/readLine.js';
+import { cyanText, yellowText, magentaText } from '../../utils/consoleTextHelper.js';
 
 const welcome = async () => {
   const currUserName =
@@ -9,13 +10,19 @@ const welcome = async () => {
 
   const currUserNameRest = currUserName.slice(1);
 
-  const completeUserName = `${currUserNameFirstLetter}${currUserNameRest}`;
+  const completeUserName = `${yellowText(`${currUserNameFirstLetter}${currUserNameRest}`)}`;
 
-  const welcomeMessage = `Welcome to the File Manager, ${completeUserName}!${os.EOL}`;
-  const goodByeMessage = `${os.EOL}Thank you for using File Manager, ${completeUserName}, goodbye!${os.EOL}`;
+  const welcomeMessage = `${cyanText('Welcome to the File Manager,')} ${completeUserName}${cyanText(
+    '!'
+  )}${os.EOL}`;
+
+  const goodByeMessage = `${os.EOL}${magentaText(
+    'Thank you for using File Manager,'
+  )} ${completeUserName}${magentaText(', goodbye!')}${os.EOL}`;
 
   await process.chdir(os.homedir());
-  const directoryMessage = `You are currently in ${process.cwd()}`;
+
+  const directoryMessage = `You are currently in ${cyanText(process.cwd())}`;
 
   console.log(welcomeMessage);
   console.log(directoryMessage);

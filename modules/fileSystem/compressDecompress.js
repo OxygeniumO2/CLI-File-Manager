@@ -6,6 +6,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import errorHandler from '../../utils/errorHandler.js';
 import os from 'node:os';
+import { greenText, cyanText } from '../../utils/consoleTextHelper.js';
 
 const compressDecompress = async (command, args) => {
   try {
@@ -33,12 +34,14 @@ const compressDecompress = async (command, args) => {
 
     await pipeline(fromStream, brotli, toStream);
 
-    const compressMsg = `File "${fileName}" successfully compressed to directory "${path.dirname(
-      to
-    )}"${os.EOL}`;
-    const decompressMsg = `File "${fileName}" successfully decompressed to directory "${path.dirname(
-      to
-    )}"${os.EOL}`;
+    const fileText = greenText('File ');
+    const compressedText = greenText(' successfully compressed to directory ');
+    const decompressedText = greenText(' successfully decompressed to directory ');
+    const fileNameCyan = cyanText(`"${fileName}"`);
+    const directoryCyan = cyanText(`"${path.dirname(to)}"`);
+
+    const compressMsg = `${fileText}${fileNameCyan}${compressedText}${directoryCyan}${os.EOL}`;
+    const decompressMsg = `${fileText}${fileNameCyan}${decompressedText}${directoryCyan}${os.EOL}`;
 
     console.log(currentCommand === COMMAND_FS.compress ? compressMsg : decompressMsg);
   } catch (err) {

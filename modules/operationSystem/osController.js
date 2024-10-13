@@ -6,13 +6,14 @@ import getArchitecture from './getArchitecture.js';
 import getEndOfLine from './getEndOfLine.js';
 import os from 'node:os';
 import errorHandler from '../../utils/errorHandler.js';
+import { redText } from '../../utils/consoleTextHelper.js';
 
 const osController = async (args) => {
   try {
     const command = args.join(' ').toLowerCase();
 
     if (!Object.values(COMMAND_OS_ARGS).includes(command)) {
-      console.log(`${ERROR.invalidCommand}${os.EOL}`);
+      console.log(`${redText(ERROR.invalidCommand)}${os.EOL}`);
       return;
     }
 

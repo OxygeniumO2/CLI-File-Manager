@@ -4,7 +4,7 @@ import { cyanText, yellowText, magentaText } from '../../utils/consoleTextHelper
 
 const welcome = async () => {
   const currUserName =
-    process.env.npm_config_username || process.argv[2].trim().split('=')[1] || 'Guest';
+    process.env.npm_config_username || process?.argv[2]?.trim().split('=')[1] || 'Guest';
 
   const currUserNameFirstLetter = currUserName[0].toUpperCase();
 

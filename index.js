@@ -9,7 +9,6 @@ import { cyanText, redText } from './utils/consoleTextHelper.js';
 const initApp = async () => {
   welcome();
 
-  const dirMsg = `You are currently in ${cyanText(process.cwd())}`;
   const errMsg = `${redText(ERROR.invalidCommand)}${os.EOL}`;
 
   rl.on('line', async (input) => {
@@ -24,7 +23,7 @@ const initApp = async () => {
 
     if (!Object.values(COMMAND).includes(command) && command !== '') {
       console.log(errMsg);
-      console.log(dirMsg);
+      console.log(`You are currently in ${cyanText(process.cwd())}`);
       return;
     }
 
@@ -39,7 +38,7 @@ const initApp = async () => {
       await osController(commandArgs);
     }
 
-    console.log(dirMsg);
+    console.log(`You are currently in ${cyanText(process.cwd())}`);
   });
 };
 
